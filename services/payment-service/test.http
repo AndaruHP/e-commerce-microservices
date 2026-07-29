@@ -3,20 +3,19 @@ POST http://localhost:8085/api/payments
 Content-Type: application/json
 
 {
-  "orderId": "b4950811-9528-49e8-99ae-7ba0f0d4facb",
+  "orderId": "8ecd9468-a8bd-4868-a9b1-f82296a0b61a",
   "userId": "7eecc8f3-a7eb-4753-b5bf-9eac7c7ac987",
-  "amount": 509.90,
   "paymentMethod": "BANK_TRANSFER"
 }
 
 ### Get payment by ID
-GET http://localhost:8085/api/payments/669fca92-809c-4364-8413-72e449f4b9ee
+GET http://localhost:8085/api/payments/242b0557-4a1f-4d8a-9881-ab917fe94ad2
 
 ### Get payment by order ID
-GET http://localhost:8085/api/payments/order/b4950811-9528-49e8-99ae-7ba0f0d4facb
+GET http://localhost:8085/api/payments/order/8ecd9468-a8bd-4868-a9b1-f82296a0b61a
 
 ### Update status to COMPLETED
-PATCH http://localhost:8085/api/payments/669fca92-809c-4364-8413-72e449f4b9ee/status
+PATCH http://localhost:8085/api/payments/242b0557-4a1f-4d8a-9881-ab917fe94ad2/status
 Content-Type: application/json
 
 {

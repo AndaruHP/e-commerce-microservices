@@ -1,5 +1,6 @@
 package com.ecommerce.paymentservice.service;
 
+import com.ecommerce.paymentservice.client.OrderServiceClient;
 import com.ecommerce.paymentservice.dto.CreatePaymentRequest;
 import com.ecommerce.paymentservice.dto.PaymentResponse;
 import com.ecommerce.paymentservice.dto.UpdatePaymentStatusRequest;
@@ -10,13 +11,16 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.Map;
 import java.util.UUID;
 
 @Service
 @AllArgsConstructor
 public class PaymentServiceImpl implements PaymentService {
     private final PaymentRepository paymentRepository;
+    private final OrderServiceClient orderServiceClient;
 
     @Override
     @Transactional
@@ -25,11 +29,14 @@ public class PaymentServiceImpl implements PaymentService {
             throw new RuntimeException("Payment already exists for this order");
         }
 
+        Map<String, Object> order = orderServiceClient.getOrder(request.orderId());
+        BigDecimal amount = new BigDecimal(order.get("totalPrice").toString());
+
         Payment payment = Payment.builder()
                 .id(UUID.randomUUID())
                 .orderId(request.orderId())
                 .userId(request.userId())
-                .amount(request.amount())
+                .amount(amount)
                 .status(PaymentStatus.PENDING.name())
                 .paymentMethod(request.paymentMethod())
                 .createdAt(LocalDateTime.now())
@@ -66,7 +73,14 @@ public class PaymentServiceImpl implements PaymentService {
 
         payment.setStatus(newStatus.name());
         payment.setUpdatedAt(LocalDateTime.now());
-        return toResponse(paymentRepository.save(payment));
+
+        Payment saved = paymentRepository.save(payment);
+
+        if (newStatus == PaymentStatus.COMPLETED) {
+            orderServiceClient.updateOrderStatus(payment.getOrderId(), "CONFIRMED");
+        }
+
+        return toResponse(saved);
     }
 
     @Override
