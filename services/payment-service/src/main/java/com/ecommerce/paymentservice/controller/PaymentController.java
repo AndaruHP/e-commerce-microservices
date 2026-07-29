@@ -13,7 +13,7 @@ import java.util.UUID;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("/api/payments")
+@RequestMapping("/api/payment")
 public class PaymentController {
     private final PaymentService paymentService;
 

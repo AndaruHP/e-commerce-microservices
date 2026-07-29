@@ -19,7 +19,7 @@ public class ProductServiceClient {
 
     public Map<String, Object> getProduct(UUID productId) {
         return restClient.get()
-                .uri(baseUrl + "/api/products/{id}", productId)
+                .uri(baseUrl + "/api/product/{id}", productId)
                 .retrieve()
                 .body(Map.class);
     }

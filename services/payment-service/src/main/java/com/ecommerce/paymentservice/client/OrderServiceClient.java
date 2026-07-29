@@ -18,14 +18,14 @@ public class OrderServiceClient {
 
     public Map<String, Object> getOrder(UUID orderId) {
         return restClient.get()
-                .uri(baseUrl + "/api/orders/{id}", orderId)
+                .uri(baseUrl + "/api/order/{id}", orderId)
                 .retrieve()
                 .body(Map.class);
     }
 
     public void updateOrderStatus(UUID orderId, String status) {
         restClient.patch()
-                .uri(baseUrl + "/api/orders/{orderId}/status", orderId)
+                .uri(baseUrl + "/api/order/{orderId}/status", orderId)
                 .body(Map.of("status", status))
                 .retrieve()
                 .toBodilessEntity();
