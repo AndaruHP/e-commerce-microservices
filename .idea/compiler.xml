@@ -14,6 +14,7 @@
         <module name="product-service" />
         <module name="order-service" />
         <module name="notification-service" />
+        <module name="gateway" />
         <module name="shipping-service" />
       </profile>
     </annotationProcessing>
@@ -22,6 +23,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="auth-service" options="-parameters" />
       <module name="cart-service" options="-parameters" />
+      <module name="gateway" options="-parameters" />
       <module name="inventory-service" options="-parameters" />
       <module name="notification-service" options="-parameters" />
       <module name="order-service" options="-parameters" />

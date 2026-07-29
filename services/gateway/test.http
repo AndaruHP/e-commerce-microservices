@@ -1,0 +1,14 @@
+### Add item to cart
+POST http://localhost:8080/api/cart/7eecc8f3-a7eb-4753-b5bf-9eac7c7ac987/items
+Content-Type: application/json
+
+{
+  "productId": "8af644c0-ef5f-40fe-a78f-b190f072002b",
+  "quantity": 1
+}
+
+### Get user's cart
+GET http://localhost:8080/api/cart/7eecc8f3-a7eb-4753-b5bf-9eac7c7ac987
+
+### Get all products
+GET http://localhost:8080/api/product
