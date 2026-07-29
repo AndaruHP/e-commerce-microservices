@@ -1,5 +1,6 @@
 package com.ecommerce.cartservice.service;
 
+import com.ecommerce.cartservice.client.ProductServiceClient;
 import com.ecommerce.cartservice.dto.AddToCartRequest;
 import com.ecommerce.cartservice.dto.CartItemResponse;
 import com.ecommerce.cartservice.dto.CartResponse;
@@ -15,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 @Service
@@ -22,6 +24,7 @@ import java.util.UUID;
 public class CartServiceImpl implements CartService {
     private final CartRepository cartRepository;
     private final CartItemRepository cartItemRepository;
+    private final ProductServiceClient productServiceClient;
 
     @Override
     public CartResponse getCart(UUID userId) {
@@ -59,12 +62,16 @@ public class CartServiceImpl implements CartService {
             existingItem.setQuantity(existingItem.getQuantity() + request.quantity());
             cartItemRepository.save(existingItem);
         } else {
+            Map<String, Object> product = productServiceClient.getProduct(request.productId());
+            String productName = (String) product.get("name");
+            BigDecimal price = new BigDecimal(product.get("price").toString());
+
             CartItem newItem = CartItem.builder()
                     .id(UUID.randomUUID())
                     .cartId(cart.getId())
                     .productId(request.productId())
-                    .productName(request.productName())
-                    .price(request.price())
+                    .productName(productName)
+                    .price(price)
                     .quantity(request.quantity())
                     .createdAt(LocalDateTime.now())
                     .build();

@@ -5,8 +5,6 @@ import java.util.UUID;
 
 public record AddToCartRequest(
         UUID productId,
-        String productName,
-        BigDecimal price,
         Integer quantity
 ) {
 }

@@ -8,8 +8,6 @@ Content-Type: application/json
 
 {
   "productId": "8af644c0-ef5f-40fe-a78f-b190f072002b",
-  "productName": "Laptop Acer",
-  "price": 49.99,
   "quantity": 1
 }
 
