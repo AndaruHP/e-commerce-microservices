@@ -1,0 +1,30 @@
+### Get user's cart
+GET http://localhost:8083/api/cart/7eecc8f3-a7eb-4753-b5bf-9eac7c7ac987
+Content-Type: application/json
+
+### Add item to cart
+POST http://localhost:8083/api/cart/7eecc8f3-a7eb-4753-b5bf-9eac7c7ac987/items
+Content-Type: application/json
+
+{
+  "productId": "8af644c0-ef5f-40fe-a78f-b190f072002b",
+  "productName": "Laptop Acer",
+  "price": 49.99,
+  "quantity": 1
+}
+
+### Delete item in cart
+PUT http://localhost:8083/api/cart/7eecc8f3-a7eb-4753-b5bf-9eac7c7ac987/items/a77141d0-a90e-41b1-b2e0-52bc15237e62
+Content-Type: application/json
+
+{
+  "quantity": 2
+}
+
+### Delete item in cart
+DELETE http://localhost:8083/api/cart/7eecc8f3-a7eb-4753-b5bf-9eac7c7ac987/items/f6b7db97-5761-4940-8f88-f1b9fe6de642
+Content-Type: application/json
+
+### Clear cart
+DELETE http://localhost:8083/api/cart/7eecc8f3-a7eb-4753-b5bf-9eac7c7ac987
+Content-Type: application/json

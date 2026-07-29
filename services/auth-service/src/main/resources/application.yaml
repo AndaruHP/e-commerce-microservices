@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: auth-service
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/auth_db
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+    locations:
+      - db/migration
+
+jwt:
+  secret: d2hhdGV2ZXJ5bG9uZ3NlY3JldGtleWZvcmp3dHRvazE=
+  access-token-expiration: 900000
+  refresh-token-expiration: 604800000
+
+server:
+  port: 8081

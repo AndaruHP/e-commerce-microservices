@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourcePerFileMappings">
+    <file url="file://$PROJECT_DIR$/services/auth-service/src/main/java/com/ecommerce/authservice/repository/RefreshTokenRepositoryImpl.java" value="0a138ffb-5b9c-4f87-9365-8105e8b2ab79" />
+    <file url="file://$PROJECT_DIR$/services/auth-service/src/main/java/com/ecommerce/authservice/repository/UserRepositoryImpl.java" value="0a138ffb-5b9c-4f87-9365-8105e8b2ab79" />
+    <file url="file://$PROJECT_DIR$/services/cart-service/src/main/java/com/ecommerce/cartservice/repository/CartItemRepositoryImpl.java" value="0a138ffb-5b9c-4f87-9365-8105e8b2ab79" />
+    <file url="file://$PROJECT_DIR$/services/cart-service/src/main/java/com/ecommerce/cartservice/repository/CartRepositoryImpl.java" value="0a138ffb-5b9c-4f87-9365-8105e8b2ab79" />
+    <file url="file://$PROJECT_DIR$/services/inventory-service/src/main/java/com/ecommerce/inventoryservice/repository/StockRepositoryImpl.java" value="0a138ffb-5b9c-4f87-9365-8105e8b2ab79" />
+    <file url="file://$PROJECT_DIR$/services/order-service/src/main/java/com/ecommerce/orderservice/repository/OrderItemRepositoryImpl.java" value="0a138ffb-5b9c-4f87-9365-8105e8b2ab79" />
+    <file url="file://$PROJECT_DIR$/services/order-service/src/main/java/com/ecommerce/orderservice/repository/OrderRepositoryImpl.java" value="0a138ffb-5b9c-4f87-9365-8105e8b2ab79" />
+    <file url="file://$PROJECT_DIR$/services/product-service/src/main/java/com/ecommerce/productservice/repository/ProductRepositoryImpl.java" value="0a138ffb-5b9c-4f87-9365-8105e8b2ab79" />
+  </component>
+</project>

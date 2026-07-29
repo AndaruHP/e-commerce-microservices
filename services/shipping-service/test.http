@@ -1,0 +1,51 @@
+### Create shipping
+POST http://localhost:8087/api/shipping
+Content-Type: application/json
+
+{
+  "orderId": "15f5d60d-cda9-4152-a282-de2cd8b9075d",
+  "userId": "7eecc8f3-a7eb-4753-b5bf-9eac7c7ac987",
+  "address": "Jl. Merdeka No. 1, Jakarta"
+}
+
+### Get shipping by ID
+GET http://localhost:8087/api/shipping/1931a60b-bd35-4251-8a72-4f94438f0deb
+
+### Get shipping by order ID
+GET http://localhost:8087/api/shipping/order/1931a60b-bd35-4251-8a72-4f94438f0deb
+
+### Get shipping by user ID
+GET http://localhost:8087/api/shipping/user/7eecc8f3-a7eb-4753-b5bf-9eac7c7ac987
+
+### Update tracking
+PATCH http://localhost:8087/api/shipping/1931a60b-bd35-4251-8a72-4f94438f0deb/tracking
+Content-Type: application/json
+
+{
+  "carrier": "JNE",
+  "trackingNumber": "JNE001234567"
+}
+
+### Update status to SHIPPED
+PATCH http://localhost:8087/api/shipping/1931a60b-bd35-4251-8a72-4f94438f0deb/status
+Content-Type: application/json
+
+{
+  "status": "SHIPPED"
+}
+
+### Update status to IN_TRANSIT
+PATCH http://localhost:8087/api/shipping/1931a60b-bd35-4251-8a72-4f94438f0deb/status
+Content-Type: application/json
+
+{
+  "status": "IN_TRANSIT"
+}
+
+### Update status to DELIVERED
+PATCH http://localhost:8087/api/shipping/1931a60b-bd35-4251-8a72-4f94438f0deb/status
+Content-Type: application/json
+
+{
+  "status": "DELIVERED"
+}

@@ -1,0 +1,37 @@
+### Create order
+POST http://localhost:8084/api/orders
+Content-Type: application/json
+
+{
+  "userId": "7eecc8f3-a7eb-4753-b5bf-9eac7c7ac987",
+  "shippingAddress": "Jl. Merdeka No. 1, Jakarta",
+  "notes": "Jangan lama-lama",
+  "items": [
+    {
+      "productId": "6790fb5f-8e63-49b3-8fb3-0a634b1d73f1",
+      "productName": "Laptop Tuf",
+      "price": 50.99,
+      "quantity": 10
+    }
+  ]
+}
+
+### Get order
+GET http://localhost:8084/api/orders/b4950811-9528-49e8-99ae-7ba0f0d4facb
+Content-Type: application/json
+
+### Get order by user
+GET http://localhost:8084/api/orders/user/7eecc8f3-a7eb-4753-b5bf-9eac7c7ac987
+Content-Type: application/json
+
+### Get all orders
+GET http://localhost:8084/api/orders
+Content-Type: application/json
+
+### Update order status
+PATCH http://localhost:8084/api/orders/b4950811-9528-49e8-99ae-7ba0f0d4facb/status
+Content-Type: application/json
+
+{
+  "status": "CONFIRMED"
+}

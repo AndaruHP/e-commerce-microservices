@@ -1,0 +1,27 @@
+### Register user
+POST http://localhost:8081/api/auth/register
+Content-Type: application/json
+
+{
+  "name": "User",
+  "email": "user@email.com",
+  "password": "user"
+}
+
+### Login user
+POST http://localhost:8081/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "user@email.com",
+  "password": "user"
+}
+
+### Refresh user
+POST http://localhost:8081/api/auth/refresh
+Content-Type: application/json
+
+{
+  "refreshToken": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZWNkMzc1YS1jMTJlLTRlNDgtYjQ3Ny1jMGJkNmU5ZGIyNzQiLCJqdGkiOiIwN2UwMjY5Mi05ZTk3LTRmOTAtYWQyNS00ZjJhZGI3NWEyY2QiLCJpYXQiOjE3ODUyMTkzMDMsImV4cCI6MTc4NTgyNDEwM30.W14YQjCCRMr27vuTAJsBcH8xygQQCYguA6p3s0kvPPg"
+}
+

@@ -1,0 +1,5 @@
+CREATE TABLE IF NOT EXISTS stocks (
+    product_id UUID PRIMARY KEY,
+    quantity INTEGER NOT NULL DEFAULT 0,
+    updated_at TIMESTAMP NOT NULL DEFAULT NOW()
+);

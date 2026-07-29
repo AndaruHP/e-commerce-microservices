@@ -1,0 +1,35 @@
+### Create payment
+POST http://localhost:8085/api/payments
+Content-Type: application/json
+
+{
+  "orderId": "b4950811-9528-49e8-99ae-7ba0f0d4facb",
+  "userId": "7eecc8f3-a7eb-4753-b5bf-9eac7c7ac987",
+  "amount": 509.90,
+  "paymentMethod": "BANK_TRANSFER"
+}
+
+### Get payment by ID
+GET http://localhost:8085/api/payments/669fca92-809c-4364-8413-72e449f4b9ee
+
+### Get payment by order ID
+GET http://localhost:8085/api/payments/order/b4950811-9528-49e8-99ae-7ba0f0d4facb
+
+### Update status to COMPLETED
+PATCH http://localhost:8085/api/payments/669fca92-809c-4364-8413-72e449f4b9ee/status
+Content-Type: application/json
+
+{
+  "status": "COMPLETED"
+}
+
+### Update status to FAILED
+PATCH http://localhost:8085/api/payments/669fca92-809c-4364-8413-72e449f4b9ee/status
+Content-Type: application/json
+
+{
+  "status": "FAILED"
+}
+
+### Refund payment (harus status COMPLETED)
+POST http://localhost:8085/api/payments/669fca92-809c-4364-8413-72e449f4b9ee/refund

@@ -1,0 +1,36 @@
+### Send notification
+POST http://localhost:8088/api/notifications
+Content-Type: application/json
+
+{
+  "userId": "550e8400-e29b-41d4-a716-446655440000",
+  "title": "Order Confirmed",
+  "message": "Your order #123 has been confirmed and is being processed.",
+  "type": "EMAIL"
+}
+
+### Get notification by ID
+GET http://localhost:8088/api/notifications/{id}
+
+### Get all notifications by user
+GET http://localhost:8088/api/notifications/user/550e8400-e29b-41d4-a716-446655440000
+
+### Get unread notifications
+GET http://localhost:8088/api/notifications/user/550e8400-e29b-41d4-a716-446655440000/unread
+
+### Count unread
+GET http://localhost:8088/api/notifications/user/550e8400-e29b-41d4-a716-446655440000/unread/count
+
+### Mark as read
+PATCH http://localhost:8088/api/notifications/{id}/read
+
+### Send SMS notification
+POST http://localhost:8088/api/notifications
+Content-Type: application/json
+
+{
+  "userId": "550e8400-e29b-41d4-a716-446655440000",
+  "title": "Payment Received",
+  "message": "Pembayaran Rp 12.500.000 telah diterima.",
+  "type": "SMS"
+}

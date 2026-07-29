@@ -1,0 +1,14 @@
+### Create product
+POST http://localhost:8082/api/products
+Content-Type: application/json
+
+{
+  "name": "Laptop Acer",
+  "description": "Laptop buat gaming juga cuy",
+  "stock": 9,
+  "price": 49.99
+}
+
+### Get all products
+GET http://localhost:8082/api/products
+Content-Type: application/json

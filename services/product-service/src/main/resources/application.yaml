@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: product-service
+
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/product_db
+    username: postgres
+    password: postgres
+
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+    locations:
+      - db/migration
+
+server:
+  port: 8082

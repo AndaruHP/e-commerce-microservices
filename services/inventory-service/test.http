@@ -1,0 +1,38 @@
+### Create stock
+POST http://localhost:8086/api/inventory
+Content-Type: application/json
+
+{
+  "productId": "6790fb5f-8e63-49b3-8fb3-0a634b1d73f1",
+  "quantity": 5
+}
+
+### Get stock by product
+GET http://localhost:8086/api/inventory/6790fb5f-8e63-49b3-8fb3-0a634b1d73f1
+
+### Get all stock
+GET http://localhost:8086/api/inventory
+
+### Add stock (+10)
+PATCH http://localhost:8086/api/inventory/6790fb5f-8e63-49b3-8fb3-0a634b1d73f1/add
+Content-Type: application/json
+
+{
+  "quantity": 10
+}
+
+### Deduct stock (-5)
+PATCH http://localhost:8086/api/inventory/6790fb5f-8e63-49b3-8fb3-0a634b1d73f1/deduct
+Content-Type: application/json
+
+{
+  "quantity": 5
+}
+
+### Update stock (overwrite)
+PUT http://localhost:8086/api/inventory/6790fb5f-8e63-49b3-8fb3-0a634b1d73f1
+Content-Type: application/json
+
+{
+  "quantity": 9
+}
