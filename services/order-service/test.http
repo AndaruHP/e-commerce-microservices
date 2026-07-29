@@ -5,15 +5,7 @@ Content-Type: application/json
 {
   "userId": "7eecc8f3-a7eb-4753-b5bf-9eac7c7ac987",
   "shippingAddress": "Jl. Merdeka No. 1, Jakarta",
-  "notes": "Jangan lama-lama",
-  "items": [
-    {
-      "productId": "6790fb5f-8e63-49b3-8fb3-0a634b1d73f1",
-      "productName": "Laptop Tuf",
-      "price": 50.99,
-      "quantity": 10
-    }
-  ]
+  "notes": "Jangan lama-lama"
 }
 
 ### Get order

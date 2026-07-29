@@ -1,5 +1,7 @@
 package com.ecommerce.orderservice.service;
 
+import com.ecommerce.orderservice.client.CartServiceClient;
+import com.ecommerce.orderservice.client.InventoryServiceClient;
 import com.ecommerce.orderservice.dto.CreateOrderRequest;
 import com.ecommerce.orderservice.dto.OrderItemResponse;
 import com.ecommerce.orderservice.dto.OrderResponse;
@@ -16,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 @Service
@@ -23,14 +26,21 @@ import java.util.UUID;
 public class OrderServiceImpl implements OrderService {
     private final OrderRepository orderRepository;
     private final OrderItemRepository orderItemRepository;
+    private final CartServiceClient cartServiceClient;
+    private final InventoryServiceClient inventoryServiceClient;
 
     @Override
     @Transactional
     public OrderResponse createOrder(CreateOrderRequest request) {
-        List<CreateOrderRequest.OrderItemRequest> itemRequests = request.items();
+        Map<String, Object> cart = cartServiceClient.getCart(request.userId());
+        List<Map<String, Object>> cartItems = (List<Map<String, Object>>) cart.get("items") ;
 
-        BigDecimal totalPrice = itemRequests.stream()
-                .map(item -> item.price().multiply(BigDecimal.valueOf(item.quantity())))
+        if (cartItems == null || cartItems.isEmpty()) {
+            throw new RuntimeException("Cart is empty");
+        }
+
+        BigDecimal totalPrice = cartItems.stream()
+                .map(item -> new BigDecimal(item.get("subtotal").toString()))
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
 
         Order order = Order.builder()
@@ -46,18 +56,24 @@ public class OrderServiceImpl implements OrderService {
 
         orderRepository.save(order);
 
-        List<OrderItem> orderItems = itemRequests.stream()
+        List<OrderItem> orderItems = cartItems.stream()
                 .map(item -> OrderItem.builder()
                         .id(UUID.randomUUID())
                         .orderId(order.getId())
-                        .productId(item.productId())
-                        .productName(item.productName())
-                        .price(item.price())
-                        .quantity(item.quantity())
+                        .productId(UUID.fromString((String) item.get("productId")))
+                        .productName((String) item.get("productName"))
+                        .price(new BigDecimal(item.get("price").toString()))
+                        .quantity((Integer) item.get("quantity"))
                         .build())
                 .toList();
 
         orderItemRepository.saveAll(orderItems);
+
+        cartServiceClient.clearCart(request.userId());
+
+        for (OrderItem item: orderItems) {
+            inventoryServiceClient.deductStock(item.getProductId(), item.getQuantity());
+        }
 
         return buildOrderResponse(order);
     }

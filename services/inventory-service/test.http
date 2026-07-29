@@ -3,12 +3,12 @@ POST http://localhost:8086/api/inventory
 Content-Type: application/json
 
 {
-  "productId": "6790fb5f-8e63-49b3-8fb3-0a634b1d73f1",
+  "productId": "8af644c0-ef5f-40fe-a78f-b190f072002b",
   "quantity": 5
 }
 
 ### Get stock by product
-GET http://localhost:8086/api/inventory/6790fb5f-8e63-49b3-8fb3-0a634b1d73f1
+GET http://localhost:8086/api/inventory/8af644c0-ef5f-40fe-a78f-b190f072002b
 
 ### Get all stock
 GET http://localhost:8086/api/inventory

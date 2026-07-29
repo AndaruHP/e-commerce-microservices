@@ -7,14 +7,6 @@ import java.util.UUID;
 public record CreateOrderRequest(
         UUID userId,
         String shippingAddress,
-        String notes,
-        List<OrderItemRequest> items
+        String notes
 ) {
-    public record OrderItemRequest(
-            UUID productId,
-            String productName,
-            BigDecimal price,
-            Integer quantity
-    ) {
-    }
 }
