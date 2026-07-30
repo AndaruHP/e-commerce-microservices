@@ -6,6 +6,8 @@ import com.ecommerce.paymentservice.dto.PaymentResponse;
 import com.ecommerce.paymentservice.dto.UpdatePaymentStatusRequest;
 import com.ecommerce.paymentservice.entity.Payment;
 import com.ecommerce.paymentservice.entity.PaymentStatus;
+import com.ecommerce.paymentservice.event.PaymentCompletedEvent;
+import com.ecommerce.paymentservice.event.PaymentEventPublisher;
 import com.ecommerce.paymentservice.repository.PaymentRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -21,6 +23,7 @@ import java.util.UUID;
 public class PaymentServiceImpl implements PaymentService {
     private final PaymentRepository paymentRepository;
     private final OrderServiceClient orderServiceClient;
+    private final PaymentEventPublisher paymentEventPublisher;
 
     @Override
     @Transactional
@@ -77,7 +80,15 @@ public class PaymentServiceImpl implements PaymentService {
         Payment saved = paymentRepository.save(payment);
 
         if (newStatus == PaymentStatus.COMPLETED) {
-            orderServiceClient.updateOrderStatus(payment.getOrderId(), "CONFIRMED");
+            PaymentCompletedEvent event = new PaymentCompletedEvent(
+                    payment.getId(),
+                    payment.getOrderId(),
+                    payment.getUserId(),
+                    payment.getAmount(),
+                    LocalDateTime.now()
+            );
+
+            paymentEventPublisher.paymentCompleted(event);
         }
 
         return toResponse(saved);

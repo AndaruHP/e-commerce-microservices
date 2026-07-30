@@ -22,12 +22,4 @@ public class OrderServiceClient {
                 .retrieve()
                 .body(Map.class);
     }
-
-    public void updateOrderStatus(UUID orderId, String status) {
-        restClient.patch()
-                .uri(baseUrl + "/api/order/{orderId}/status", orderId)
-                .body(Map.of("status", status))
-                .retrieve()
-                .toBodilessEntity();
-    }
 }

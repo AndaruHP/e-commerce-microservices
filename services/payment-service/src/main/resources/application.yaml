@@ -1,16 +1,23 @@
 spring:
   application:
     name: payment-service
+
   datasource:
     url: jdbc:postgresql://localhost:5432/payment_db
     username: postgres
     password: postgres
     driver-class-name: org.postgresql.Driver
+
   flyway:
     enabled: true
     baseline-on-migrate: true
     locations:
       - db/migration
+
+  kafka:
+    bootstrap-servers: localhost:9092
+    producer:
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
 
 server:
   port: 8085
