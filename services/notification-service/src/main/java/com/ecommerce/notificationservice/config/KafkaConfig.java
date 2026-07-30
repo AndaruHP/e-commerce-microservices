@@ -1,6 +1,6 @@
 package com.ecommerce.notificationservice.config;
 
-import com.ecommerce.notificationservice.event.OrderConfirmedEvent;
+import com.ecommerce.notificationservice.event.OrderCreatedEvent;
 import com.ecommerce.notificationservice.event.PaymentCompletedEvent;
 import org.apache.kafka.clients.admin.NewTopic;
 import org.apache.kafka.common.serialization.StringDeserializer;
@@ -11,7 +11,6 @@ import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
 import org.springframework.kafka.core.ConsumerFactory;
 import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
 import org.springframework.kafka.support.serializer.JacksonJsonDeserializer;
-import tools.jackson.databind.ObjectMapper;
 
 @Configuration
 public class KafkaConfig {
@@ -21,8 +20,8 @@ public class KafkaConfig {
     }
 
     @Bean
-    public NewTopic orderConfirmedTopic() {
-        return new NewTopic("order.confirmed", 1, (short) 1);
+    public NewTopic orderCreatedTopic() {
+        return new NewTopic("order.created", 1, (short) 1);
     }
 
     @Bean
@@ -46,21 +45,21 @@ public class KafkaConfig {
     }
 
     @Bean
-    public ConsumerFactory<String, OrderConfirmedEvent> orderConfirmedEventConsumerFactory(
+    public ConsumerFactory<String, OrderCreatedEvent> orderCreatedEventConsumerFactory(
             KafkaProperties properties
     ) {
         return new DefaultKafkaConsumerFactory<>(
                 properties.buildConsumerProperties(),
                 new StringDeserializer(),
-                new JacksonJsonDeserializer<>(OrderConfirmedEvent.class)
+                new JacksonJsonDeserializer<>(OrderCreatedEvent.class)
         );
     }
 
     @Bean
-    public ConcurrentKafkaListenerContainerFactory<String, OrderConfirmedEvent> orderConfirmedEventConcurrentKafkaListenerContainerFactory(
-            ConsumerFactory<String, OrderConfirmedEvent> orderConfirmedEventConsumerFactory
+    public ConcurrentKafkaListenerContainerFactory<String, OrderCreatedEvent> orderCreatedEventConcurrentKafkaListenerContainerFactory(
+            ConsumerFactory<String, OrderCreatedEvent> orderConfirmedEventConsumerFactory
     ) {
-        ConcurrentKafkaListenerContainerFactory<String, OrderConfirmedEvent> factory = new ConcurrentKafkaListenerContainerFactory<>();
+        ConcurrentKafkaListenerContainerFactory<String, OrderCreatedEvent> factory = new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(orderConfirmedEventConsumerFactory);
         return factory;
     }

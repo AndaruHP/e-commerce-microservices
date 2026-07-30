@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 public class OrderEventPublisher {
     private final KafkaTemplate<String, Object> kafkaTemplate;
 
-    public void orderConfirmed(OrderConfirmedEvent event) {
-        kafkaTemplate.send("order.confirmed", event.orderId().toString(), event);
+    public void orderCreated(OrderCreatedEvent event) {
+        kafkaTemplate.send("order.created", event.orderId().toString(), event);
     }
 }

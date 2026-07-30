@@ -8,7 +8,7 @@ import com.ecommerce.orderservice.dto.UpdateStatusRequest;
 import com.ecommerce.orderservice.entity.Order;
 import com.ecommerce.orderservice.entity.OrderItem;
 import com.ecommerce.orderservice.entity.OrderStatus;
-import com.ecommerce.orderservice.event.OrderConfirmedEvent;
+import com.ecommerce.orderservice.event.OrderCreatedEvent;
 import com.ecommerce.orderservice.event.OrderEventPublisher;
 import com.ecommerce.orderservice.repository.OrderItemRepository;
 import com.ecommerce.orderservice.repository.OrderRepository;
@@ -72,15 +72,15 @@ public class OrderServiceImpl implements OrderService {
 
         cartServiceClient.clearCart(request.userId());
 
-        OrderConfirmedEvent event = new OrderConfirmedEvent(
+        OrderCreatedEvent event = new OrderCreatedEvent(
                 order.getId(),
                 order.getUserId(),
                 orderItems.stream()
-                        .map(item -> new OrderConfirmedEvent.OrderItemEvent(item.getProductId(), item.getQuantity()))
+                        .map(item -> new OrderCreatedEvent.OrderItemEvent(item.getProductId(), item.getQuantity()))
                         .toList()
         );
 
-        orderEventPublisher.orderConfirmed(event);
+        orderEventPublisher.orderCreated(event);
 
         return buildOrderResponse(order);
     }

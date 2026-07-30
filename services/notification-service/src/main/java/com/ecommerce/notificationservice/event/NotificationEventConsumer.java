@@ -26,15 +26,15 @@ public class NotificationEventConsumer {
     }
 
     @KafkaListener(
-            topics = "order.confirmed",
+            topics = "order.created",
             groupId = "notification-service",
-            containerFactory = "orderConfirmedEventConcurrentKafkaListenerContainerFactory"
+            containerFactory = "orderCreatedEventConcurrentKafkaListenerContainerFactory"
     )
-    public void handleOrderConfirmed(OrderConfirmedEvent event) {
+    public void handleOrderConfirmed(OrderCreatedEvent event) {
         notificationService.sendNotification(new SendNotificationRequest(
                 event.userId(),
-                "Order Confirmed",
-                "Your order " + event.orderId() + " has been confirmed and is being processed.",
+                "Order Created",
+                "Your order " + event.orderId() + " has been created.",
                 "EMAIL"
         ));
     }

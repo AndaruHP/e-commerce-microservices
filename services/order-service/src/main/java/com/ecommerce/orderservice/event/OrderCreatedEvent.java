@@ -3,7 +3,7 @@ package com.ecommerce.orderservice.event;
 import java.util.List;
 import java.util.UUID;
 
-public record OrderConfirmedEvent(
+public record OrderCreatedEvent(
         UUID orderId,
         UUID userId,
         List<OrderItemEvent> items
