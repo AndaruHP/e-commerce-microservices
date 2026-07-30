@@ -1,7 +1,6 @@
 package com.ecommerce.orderservice.service;
 
 import com.ecommerce.orderservice.client.CartServiceClient;
-import com.ecommerce.orderservice.client.InventoryServiceClient;
 import com.ecommerce.orderservice.dto.CreateOrderRequest;
 import com.ecommerce.orderservice.dto.OrderItemResponse;
 import com.ecommerce.orderservice.dto.OrderResponse;
@@ -9,6 +8,8 @@ import com.ecommerce.orderservice.dto.UpdateStatusRequest;
 import com.ecommerce.orderservice.entity.Order;
 import com.ecommerce.orderservice.entity.OrderItem;
 import com.ecommerce.orderservice.entity.OrderStatus;
+import com.ecommerce.orderservice.event.OrderConfirmedEvent;
+import com.ecommerce.orderservice.event.OrderEventPublisher;
 import com.ecommerce.orderservice.repository.OrderItemRepository;
 import com.ecommerce.orderservice.repository.OrderRepository;
 import lombok.AllArgsConstructor;
@@ -27,7 +28,7 @@ public class OrderServiceImpl implements OrderService {
     private final OrderRepository orderRepository;
     private final OrderItemRepository orderItemRepository;
     private final CartServiceClient cartServiceClient;
-    private final InventoryServiceClient inventoryServiceClient;
+    private final OrderEventPublisher orderEventPublisher;
 
     @Override
     @Transactional
@@ -71,9 +72,15 @@ public class OrderServiceImpl implements OrderService {
 
         cartServiceClient.clearCart(request.userId());
 
-        for (OrderItem item: orderItems) {
-            inventoryServiceClient.deductStock(item.getProductId(), item.getQuantity());
-        }
+        OrderConfirmedEvent event = new OrderConfirmedEvent(
+                order.getId(),
+                order.getUserId(),
+                orderItems.stream()
+                        .map(item -> new OrderConfirmedEvent.OrderItemEvent(item.getProductId(), item.getQuantity()))
+                        .toList()
+        );
+
+        orderEventPublisher.orderConfirmed(event);
 
         return buildOrderResponse(order);
     }

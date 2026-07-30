@@ -1,4 +1,4 @@
-package com.ecommerce.orderservice.config;
+package com.ecommerce.inventoryservice.config;
 
 import org.apache.kafka.clients.admin.NewTopic;
 import org.springframework.context.annotation.Bean;
@@ -7,11 +7,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class KafkaConfig {
     @Bean
-    public NewTopic paymentCompletedTopic() {
-        return new NewTopic("payment.completed", 1, (short) 1);
-    }
-
-    @Bean NewTopic orderConfirmedTopic() {
+    public NewTopic orderConfirmedTopic() {
         return new NewTopic("order.confirmed", 1, (short) 1);
     }
 }

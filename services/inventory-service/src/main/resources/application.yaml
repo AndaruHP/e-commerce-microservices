@@ -14,5 +14,13 @@ spring:
     locations:
       - db/migration
 
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: "*"
+        spring.json.value.default.type: com.ecommerce.inventoryservice.event.OrderConfirmedEvent
+
 server:
   port: 8086
