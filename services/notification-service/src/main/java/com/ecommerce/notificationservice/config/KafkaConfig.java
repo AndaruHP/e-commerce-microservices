@@ -1,5 +1,6 @@
 package com.ecommerce.notificationservice.config;
 
+import com.ecommerce.notificationservice.event.OrderConfirmedEvent;
 import com.ecommerce.notificationservice.event.OrderCreatedEvent;
 import com.ecommerce.notificationservice.event.PaymentCompletedEvent;
 import org.apache.kafka.clients.admin.NewTopic;
@@ -22,6 +23,11 @@ public class KafkaConfig {
     @Bean
     public NewTopic orderCreatedTopic() {
         return new NewTopic("order.created", 1, (short) 1);
+    }
+
+    @Bean
+    public NewTopic orderConfirmedTopic() {
+        return new NewTopic("order.confirmed", 1, (short) 1);
     }
 
     @Bean
@@ -60,6 +66,26 @@ public class KafkaConfig {
             ConsumerFactory<String, OrderCreatedEvent> orderConfirmedEventConsumerFactory
     ) {
         ConcurrentKafkaListenerContainerFactory<String, OrderCreatedEvent> factory = new ConcurrentKafkaListenerContainerFactory<>();
+        factory.setConsumerFactory(orderConfirmedEventConsumerFactory);
+        return factory;
+    }
+
+    @Bean
+    public ConsumerFactory<String, OrderConfirmedEvent> orderConfirmedEventConsumerFactory(
+            KafkaProperties properties
+    ) {
+        return new DefaultKafkaConsumerFactory<>(
+                properties.buildConsumerProperties(),
+                new StringDeserializer(),
+                new JacksonJsonDeserializer<>(OrderConfirmedEvent.class)
+        );
+    }
+
+    @Bean
+    public ConcurrentKafkaListenerContainerFactory<String, OrderConfirmedEvent> orderConfirmedEventConcurrentKafkaListenerContainerFactory(
+            ConsumerFactory<String, OrderConfirmedEvent> orderConfirmedEventConsumerFactory
+    ) {
+        ConcurrentKafkaListenerContainerFactory<String, OrderConfirmedEvent> factory = new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(orderConfirmedEventConsumerFactory);
         return factory;
     }

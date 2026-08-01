@@ -8,6 +8,7 @@ import com.ecommerce.orderservice.dto.UpdateStatusRequest;
 import com.ecommerce.orderservice.entity.Order;
 import com.ecommerce.orderservice.entity.OrderItem;
 import com.ecommerce.orderservice.entity.OrderStatus;
+import com.ecommerce.orderservice.event.OrderCancelledEvent;
 import com.ecommerce.orderservice.event.OrderCreatedEvent;
 import com.ecommerce.orderservice.event.OrderEventPublisher;
 import com.ecommerce.orderservice.repository.OrderItemRepository;
@@ -115,11 +116,27 @@ public class OrderServiceImpl implements OrderService {
         OrderStatus newStatus = OrderStatus.valueOf(request.status().toUpperCase());
 
         OrderStatus currStatus = OrderStatus.valueOf(order.getStatus());
+
+        if (currStatus == newStatus) {
+            return buildOrderResponse(order);
+        }
+
         validateStatusTransition(currStatus, newStatus);
 
         order.setStatus(newStatus.name());
         order.setUpdatedAt(LocalDateTime.now());
         orderRepository.save(order);
+
+        if (newStatus == OrderStatus.CANCELED) {
+            List<OrderItem> items = orderItemRepository.findByOrderId(order.getId());
+            orderEventPublisher.orderCancelled(new OrderCancelledEvent(
+                    order.getId(),
+                    order.getUserId(),
+                    items.stream()
+                            .map(item -> new OrderCancelledEvent.OrderItemEvent(item.getProductId(), item.getQuantity()))
+                            .toList()
+            ));
+        } 
 
         return buildOrderResponse(order);
     }

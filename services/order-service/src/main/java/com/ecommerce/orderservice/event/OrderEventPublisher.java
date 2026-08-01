@@ -12,4 +12,12 @@ public class OrderEventPublisher {
     public void orderCreated(OrderCreatedEvent event) {
         kafkaTemplate.send("order.created", event.orderId().toString(), event);
     }
+
+    public void orderConfirmed(OrderConfirmedEvent event) {
+        kafkaTemplate.send("order.confirmed", event.orderId().toString(), event);
+    }
+
+    public void orderCancelled(OrderCancelledEvent event) {
+        kafkaTemplate.send("order.cancelled", event.orderId().toString(), event);
+    }
 }

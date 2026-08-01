@@ -11,10 +11,28 @@ import org.springframework.stereotype.Component;
 public class OrderEventConsumer {
     private final InventoryService inventoryService;
 
-    @KafkaListener(topics = "order.confirmed", groupId = "inventory-service")
-    public void handleOrderConfirmed(OrderConfirmedEvent event) {
+    @KafkaListener(
+            topics = "order.created",
+            groupId = "inventory-service",
+            containerFactory = "orderCreatedEventConcurrentKafkaListenerContainerFactory"
+    )
+    public void handleOrderCreated(OrderCreatedEvent event) {
         for (var item: event.items()) {
             inventoryService.deductStock(
+                    item.productId(),
+                    new StockRequest(item.productId(), item.quantity())
+            );
+        }
+    }
+
+    @KafkaListener(
+            topics = "order.cancelled",
+            groupId = "inventory-service",
+            containerFactory = "orderCancelledEventConcurrentKafkaListenerContainerFactory"
+    )
+    public void handleOrderCancelled(OrderCancelledEvent event) {
+        for (var item: event.items()) {
+            inventoryService.addStock(
                     item.productId(),
                     new StockRequest(item.productId(), item.quantity())
             );

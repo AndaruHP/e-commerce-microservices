@@ -10,9 +10,14 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class PaymentEventConsumer {
     private final OrderService orderService;
+    private final OrderEventPublisher orderEventPublisher;
 
     @KafkaListener(topics = "payment.completed", groupId = "order-service")
     public void handlePaymentCompleted(PaymentCompletedEvent event) {
         orderService.updateStatus(event.orderId(), new UpdateStatusRequest("CONFIRMED"));
+        orderEventPublisher.orderConfirmed(new OrderConfirmedEvent(
+                event.orderId(),
+                event.userId()
+        ));
     }
 }

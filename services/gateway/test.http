@@ -28,13 +28,13 @@ POST http://localhost:8080/api/payment
 Content-Type: application/json
 
 {
-  "orderId": "5138b392-d65c-4f89-a1f4-361c77cc8a6f",
+  "orderId": "f20af0b9-fec1-4a0c-aa72-4c89ab9e1258",
   "userId": "7eecc8f3-a7eb-4753-b5bf-9eac7c7ac987",
   "paymentMethod": "BANK_TRANSFER"
 }
 
 ### Update status to COMPLETED
-PATCH http://localhost:8080/api/payment/482c0fba-556b-425d-b393-b328f738c803/status
+PATCH http://localhost:8080/api/payment/9147fad5-d2a5-42ea-aca5-77034d03d69d/status
 Content-Type: application/json
 
 {
