@@ -1,16 +1,25 @@
 spring:
   application:
     name: shipping-service
+
   datasource:
     url: jdbc:postgresql://localhost:5432/shipping_db
     username: postgres
     password: postgres
     driver-class-name: org.postgresql.Driver
+
   flyway:
     enabled: true
     baseline-on-migrate: true
     locations:
       - db/migration
+
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      properties:
+        spring.json.trusted.packages: "*"
+
 
 jwt:
   secret: d2hhdGV2ZXJ5bG9uZ3NlY3JldGtleWZvcmp3dHRvazE=

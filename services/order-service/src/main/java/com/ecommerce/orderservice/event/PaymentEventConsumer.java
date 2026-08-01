@@ -1,5 +1,6 @@
 package com.ecommerce.orderservice.event;
 
+import com.ecommerce.orderservice.dto.OrderResponse;
 import com.ecommerce.orderservice.dto.UpdateStatusRequest;
 import com.ecommerce.orderservice.service.OrderService;
 import lombok.RequiredArgsConstructor;
@@ -14,10 +15,11 @@ public class PaymentEventConsumer {
 
     @KafkaListener(topics = "payment.completed", groupId = "order-service")
     public void handlePaymentCompleted(PaymentCompletedEvent event) {
-        orderService.updateStatus(event.orderId(), new UpdateStatusRequest("CONFIRMED"));
+        OrderResponse order = orderService.updateStatus(event.orderId(), new UpdateStatusRequest("CONFIRMED"));
         orderEventPublisher.orderConfirmed(new OrderConfirmedEvent(
-                event.orderId(),
-                event.userId()
+                order.id(),
+                order.userId(),
+                order.shippingAddress()
         ));
     }
 }
