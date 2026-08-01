@@ -21,6 +21,13 @@ spring:
       properties:
         spring.json.add.type.headers: false
 
+jwt:
+  secret: d2hhdGV2ZXJ5bG9uZ3NlY3JldGtleWZvcmp3dHRvazE=
+
+internal:
+  auth:
+    service: payment-service
+
 server:
   port: 8085
 

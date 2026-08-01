@@ -11,6 +11,7 @@
         <module name="cart-service" />
         <module name="inventory-service" />
         <module name="payment-service" />
+        <module name="security-common" />
         <module name="product-service" />
         <module name="order-service" />
         <module name="notification-service" />
@@ -29,6 +30,7 @@
       <module name="order-service" options="-parameters" />
       <module name="payment-service" options="-parameters" />
       <module name="product-service" options="-parameters" />
+      <module name="security-common" options="-parameters" />
       <module name="shipping-service" options="-parameters" />
     </option>
   </component>

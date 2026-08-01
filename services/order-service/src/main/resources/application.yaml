@@ -26,6 +26,13 @@ spring:
         spring.json.trusted.packages: "*"
         spring.json.value.default.type: com.ecommerce.orderservice.event.PaymentCompletedEvent
 
+jwt:
+  secret: d2hhdGV2ZXJ5bG9uZ3NlY3JldGtleWZvcmp3dHRvazE=
+
+internal:
+  auth:
+    service: order-service
+
 server:
   port: 8084
 

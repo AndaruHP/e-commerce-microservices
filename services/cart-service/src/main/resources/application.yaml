@@ -13,6 +13,12 @@ spring:
     baseline-on-migrate: true
     locations:
       - db/migration
+jwt:
+  secret: d2hhdGV2ZXJ5bG9uZ3NlY3JldGtleWZvcmp3dHRvazE=
+
+internal:
+  auth:
+    service: cart-service
 
 server:
   port: 8083

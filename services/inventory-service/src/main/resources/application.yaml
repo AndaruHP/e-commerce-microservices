@@ -20,5 +20,8 @@ spring:
       properties:
         spring.json.trusted.packages: "*"
 
+jwt:
+  secret: d2hhdGV2ZXJ5bG9uZ3NlY3JldGtleWZvcmp3dHRvazE=
+
 server:
   port: 8086

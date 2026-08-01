@@ -1,5 +1,6 @@
 ### Add item to cart
 POST http://localhost:8080/api/cart/7eecc8f3-a7eb-4753-b5bf-9eac7c7ac987/items
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI3ZWVjYzhmMy1hN2ViLTQ3NTMtYjViZi05ZWFjN2M3YWM5ODciLCJlbWFpbCI6InVzZXJAZW1haWwuY29tIiwicm9sZSI6IlJPTEVfVVNFUiIsImlhdCI6MTc4NTU1NDU3MCwiZXhwIjoxNzg1NTU1NDcwfQ.vJ6nJKnBLRlX6sLuWA_yL1zjihe9xUNn4WqWUzTITWo
 Content-Type: application/json
 
 {
@@ -9,12 +10,14 @@ Content-Type: application/json
 
 ### Get user's cart
 GET http://localhost:8080/api/cart/7eecc8f3-a7eb-4753-b5bf-9eac7c7ac987
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI3ZWVjYzhmMy1hN2ViLTQ3NTMtYjViZi05ZWFjN2M3YWM5ODciLCJlbWFpbCI6InVzZXJAZW1haWwuY29tIiwicm9sZSI6IlJPTEVfVVNFUiIsImlhdCI6MTc4NTU1NDU3MCwiZXhwIjoxNzg1NTU1NDcwfQ.vJ6nJKnBLRlX6sLuWA_yL1zjihe9xUNn4WqWUzTITWo
 
 ### Get all products
 GET http://localhost:8080/api/product
 
 ### Create order
 POST http://localhost:8080/api/order
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI3ZWVjYzhmMy1hN2ViLTQ3NTMtYjViZi05ZWFjN2M3YWM5ODciLCJlbWFpbCI6InVzZXJAZW1haWwuY29tIiwicm9sZSI6IlJPTEVfVVNFUiIsImlhdCI6MTc4NTU1NDU3MCwiZXhwIjoxNzg1NTU1NDcwfQ.vJ6nJKnBLRlX6sLuWA_yL1zjihe9xUNn4WqWUzTITWo
 Content-Type: application/json
 
 {
@@ -33,18 +36,20 @@ Content-Type: application/json
 
 ### Create payment
 POST http://localhost:8080/api/payment
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI3ZWVjYzhmMy1hN2ViLTQ3NTMtYjViZi05ZWFjN2M3YWM5ODciLCJlbWFpbCI6InVzZXJAZW1haWwuY29tIiwicm9sZSI6IlJPTEVfVVNFUiIsImlhdCI6MTc4NTU1NDU3MCwiZXhwIjoxNzg1NTU1NDcwfQ.vJ6nJKnBLRlX6sLuWA_yL1zjihe9xUNn4WqWUzTITWo
 Content-Type: application/json
 
 {
-  "orderId": "7683137a-a8fa-443b-b0ff-efa851bba12d",
+  "orderId": "9b868aac-dd25-4c09-ac87-db16f63c540e",
   "userId": "7eecc8f3-a7eb-4753-b5bf-9eac7c7ac987",
   "paymentMethod": "BANK_TRANSFER"
 }
 
 ### Update status to COMPLETED
-PATCH http://localhost:8080/api/payment/43afd3b5-ce0d-490c-aa85-c9a3320b8640/status
+PATCH http://localhost:8080/api/payment/ea1974bb-2f7b-42e3-b0b6-9968ca9a0b39/status
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI3ZWVjYzhmMy1hN2ViLTQ3NTMtYjViZi05ZWFjN2M3YWM5ODciLCJlbWFpbCI6InVzZXJAZW1haWwuY29tIiwicm9sZSI6IlJPTEVfVVNFUiIsImlhdCI6MTc4NTU1NDU3MCwiZXhwIjoxNzg1NTU1NDcwfQ.vJ6nJKnBLRlX6sLuWA_yL1zjihe9xUNn4WqWUzTITWo
 Content-Type: application/json
 
 {
-  "status": "CANCELED"
+  "status": "COMPLETED"
 }
