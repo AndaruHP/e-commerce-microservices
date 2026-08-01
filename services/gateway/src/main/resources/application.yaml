@@ -39,6 +39,26 @@ spring:
               uri: http://localhost:8088
               predicates:
                 - Path=/api/notification/**
+          globalcors:
+            add-to-simple-url-handler-mapping: true
+            cors-configurations:
+              '[/**]':
+                allowed-origins:
+                - "http://localhost:5173"
+                allowed-methods:
+                  - GET
+                  - POST
+                  - PUT
+                  - PATCH
+                  - DELETE
+                  - OPTIONS
+                allowed-headers:
+                - "*"
+                allow-credentials: true
+                max-age: 3600
+          httpclient:
+            connect-timeout: 5000
+            response-timeout: 10s
 
 server:
   port: 8080
