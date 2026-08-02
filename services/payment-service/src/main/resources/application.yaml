@@ -33,4 +33,4 @@ server:
 
 services:
   order-service:
-    url: http://localhost:8084
+    url: ${ORDER_SERVICE_URL:http://localhost:8084}

@@ -38,6 +38,6 @@ server:
 
 services:
   cart-service:
-    url: http://localhost:8083
+    url: ${CART_SERVICE_URL:http://localhost:8083}
   inventory-service:
-    url: http://localhost:8086
+    url: ${INVENTORY_SERVICE_URL:http://localhost:8086}
