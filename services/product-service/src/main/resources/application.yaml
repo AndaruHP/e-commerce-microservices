@@ -23,6 +23,9 @@ spring:
       time-to-live: 5m
       cache-null-values: false
 
+  elasticsearch:
+    uris: ${ELASTICSEARCH_URIS:http://localhost:9200}
+
 jwt:
   secret: d2hhdGV2ZXJ5bG9uZ3NlY3JldGtleWZvcmp3dHRvazE=
 

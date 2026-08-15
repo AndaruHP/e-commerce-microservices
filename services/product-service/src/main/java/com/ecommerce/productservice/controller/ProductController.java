@@ -2,6 +2,7 @@ package com.ecommerce.productservice.controller;
 
 import com.ecommerce.productservice.dto.ProductRequest;
 import com.ecommerce.productservice.dto.ProductResponse;
+import com.ecommerce.productservice.service.ProductSearchService;
 import com.ecommerce.productservice.service.ProductService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -16,6 +17,7 @@ import java.util.UUID;
 @AllArgsConstructor
 public class ProductController {
     private final ProductService productService;
+    private final ProductSearchService productSearchService;
 
     @GetMapping
     public ResponseEntity<List<ProductResponse>> getAllProducts() {
@@ -25,6 +27,15 @@ public class ProductController {
     @GetMapping("/{id}")
     public ResponseEntity<ProductResponse> getProductById(@PathVariable UUID id) {
         return ResponseEntity.ok(productService.getProductById(id));
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<List<ProductResponse>> searchProduct(
+            @RequestParam(required = false) String q,
+            @RequestParam(required = false) Double minPrice,
+            @RequestParam(required = false) Double maxPrice
+    ) {
+        return ResponseEntity.ok(productSearchService.search(q, minPrice, maxPrice));
     }
 
     @PostMapping

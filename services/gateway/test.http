@@ -1,4 +1,4 @@
-@token = eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI3ZWVjYzhmMy1hN2ViLTQ3NTMtYjViZi05ZWFjN2M3YWM5ODciLCJlbWFpbCI6InVzZXJAZW1haWwuY29tIiwicm9sZSI6IlJPTEVfVVNFUiIsImlhdCI6MTc4NjgwMjQ3NCwiZXhwIjoxNzg2ODAzMzc0fQ.tSMaJxJb-o_YoKwt4AZazoNKIfFw_FELe4TqL_3UNPA
+@token = eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI3ZWVjYzhmMy1hN2ViLTQ3NTMtYjViZi05ZWFjN2M3YWM5ODciLCJlbWFpbCI6InVzZXJAZW1haWwuY29tIiwicm9sZSI6IlJPTEVfVVNFUiIsImlhdCI6MTc4NjgxMjMzNiwiZXhwIjoxNzg2ODEzMjM2fQ.fCpsc2JF-GjBiDCOeNxtWLFGQG-fy0UbiCZG9gdi6-U
 
 ### Login user
 POST http://localhost:8080/api/auth/login
@@ -30,6 +30,22 @@ Authorization: Bearer {{token}}
 ### Get a product
 GET http://localhost:8080/api/product/6790fb5f-8e63-49b3-8fb3-0a634b1d73f1
 Authorization: Bearer {{token}}
+
+### Search a product
+GET http://localhost:8080/api/product/search?q=samsung
+Authorization: Bearer {{token}}
+
+### Create product
+POST http://localhost:8080/api/product
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "name": "Samsung Note 3",
+  "description": "Mantap",
+  "stock": 10,
+  "price": 29.99
+}
 
 ### Update a product
 PUT http://localhost:8080/api/product/8af644c0-ef5f-40fe-a78f-b190f072002b
@@ -87,3 +103,9 @@ GET http://localhost:9200/_cluster/health
 
 ### Logstash
 GET http://localhost:9200/_cat/indices
+
+### Elasticsearch
+GET http://localhost:9200/products/_count
+
+### Elasticsearch
+GET http://localhost:9200/products/_search?pretty

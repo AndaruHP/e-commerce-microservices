@@ -18,6 +18,7 @@ import java.util.UUID;
 @AllArgsConstructor
 public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;
+    private final ProductSearchService productSearchService;
 
     @Override
     public List<ProductResponse> getAllProducts() {
@@ -47,7 +48,11 @@ public class ProductServiceImpl implements ProductService {
                 .updatedAt(LocalDateTime.now())
                 .build();
         Product savedProduct = productRepository.save(product);
-        return toResponse(savedProduct);
+
+        ProductResponse response = toResponse(savedProduct);
+        productSearchService.index(response);
+
+        return response;
     }
 
     @Override
@@ -64,7 +69,11 @@ public class ProductServiceImpl implements ProductService {
         product.setUpdatedAt(LocalDateTime.now());
 
         Product updatedProduct = productRepository.save(product);
-        return toResponse(updatedProduct);
+
+        ProductResponse response = toResponse(updatedProduct);
+        productSearchService.index(response);
+
+        return response;
     }
 
     @Override
@@ -75,6 +84,7 @@ public class ProductServiceImpl implements ProductService {
                 .orElseThrow(() -> new RuntimeException("Product not found"));
 
         productRepository.deleteById(id);
+        productSearchService.remove(id);
     }
 
     private ProductResponse toResponse(Product product) {
