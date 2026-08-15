@@ -5,6 +5,8 @@ import com.ecommerce.productservice.dto.ProductResponse;
 import com.ecommerce.productservice.entity.Product;
 import com.ecommerce.productservice.repository.ProductRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,6 +27,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    @Cacheable(value = "products", key = "#id")
     public ProductResponse getProductById(UUID id) {
         Product product = productRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Product not found"));
@@ -48,6 +51,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    @CacheEvict(value = "products", key = "#id")
     @Transactional
     public ProductResponse updateProduct(UUID id, ProductRequest request) {
         Product product = productRepository.findById(id)
@@ -64,6 +68,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    @CacheEvict(value = "products", key = "#id")
     @Transactional
     public void deleteProduct(UUID id) {
         productRepository.findById(id)

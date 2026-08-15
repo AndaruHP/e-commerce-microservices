@@ -1,6 +1,17 @@
+@token = eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI3ZWVjYzhmMy1hN2ViLTQ3NTMtYjViZi05ZWFjN2M3YWM5ODciLCJlbWFpbCI6InVzZXJAZW1haWwuY29tIiwicm9sZSI6IlJPTEVfVVNFUiIsImlhdCI6MTc4NjgwMjQ3NCwiZXhwIjoxNzg2ODAzMzc0fQ.tSMaJxJb-o_YoKwt4AZazoNKIfFw_FELe4TqL_3UNPA
+
+### Login user
+POST http://localhost:8080/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "user@email.com",
+  "password": "user"
+}
+
 ### Add item to cart
 POST http://localhost:8080/api/cart/7eecc8f3-a7eb-4753-b5bf-9eac7c7ac987/items
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI3ZWVjYzhmMy1hN2ViLTQ3NTMtYjViZi05ZWFjN2M3YWM5ODciLCJlbWFpbCI6InVzZXJAZW1haWwuY29tIiwicm9sZSI6IlJPTEVfVVNFUiIsImlhdCI6MTc4NTU5NjA5MCwiZXhwIjoxNzg1NTk2OTkwfQ.-duyMZjJYCShNWYCLfeVxnhCtgq1xPVp1z04Ivly-6Y
+Authorization: Bearer {{token}}
 Content-Type: application/json
 
 {
@@ -10,14 +21,31 @@ Content-Type: application/json
 
 ### Get user's cart
 GET http://localhost:8080/api/cart/7eecc8f3-a7eb-4753-b5bf-9eac7c7ac987
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI3ZWVjYzhmMy1hN2ViLTQ3NTMtYjViZi05ZWFjN2M3YWM5ODciLCJlbWFpbCI6InVzZXJAZW1haWwuY29tIiwicm9sZSI6IlJPTEVfVVNFUiIsImlhdCI6MTc4NTU5NjA5MCwiZXhwIjoxNzg1NTk2OTkwfQ.-duyMZjJYCShNWYCLfeVxnhCtgq1xPVp1z04Ivly-6Y
+Authorization: Bearer {{token}}
 
 ### Get all products
 GET http://localhost:8080/api/product
+Authorization: Bearer {{token}}
+
+### Get a product
+GET http://localhost:8080/api/product/6790fb5f-8e63-49b3-8fb3-0a634b1d73f1
+Authorization: Bearer {{token}}
+
+### Update a product
+PUT http://localhost:8080/api/product/8af644c0-ef5f-40fe-a78f-b190f072002b
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "name": "Laptop Acer",
+  "description": "Laptop buat gaming cuy",
+  "price": 48.99,
+  "stock": 9
+}
 
 ### Create order
 POST http://localhost:8080/api/order
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI3ZWVjYzhmMy1hN2ViLTQ3NTMtYjViZi05ZWFjN2M3YWM5ODciLCJlbWFpbCI6InVzZXJAZW1haWwuY29tIiwicm9sZSI6IlJPTEVfVVNFUiIsImlhdCI6MTc4NTU5NjA5MCwiZXhwIjoxNzg1NTk2OTkwfQ.-duyMZjJYCShNWYCLfeVxnhCtgq1xPVp1z04Ivly-6Y
+Authorization: Bearer {{token}}
 Content-Type: application/json
 
 {
@@ -36,18 +64,18 @@ Content-Type: application/json
 
 ### Create payment
 POST http://localhost:8080/api/payment
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI3ZWVjYzhmMy1hN2ViLTQ3NTMtYjViZi05ZWFjN2M3YWM5ODciLCJlbWFpbCI6InVzZXJAZW1haWwuY29tIiwicm9sZSI6IlJPTEVfVVNFUiIsImlhdCI6MTc4NTU5NjA5MCwiZXhwIjoxNzg1NTk2OTkwfQ.-duyMZjJYCShNWYCLfeVxnhCtgq1xPVp1z04Ivly-6Y
+Authorization: Bearer {{token}}
 Content-Type: application/json
 
 {
-  "orderId": "c9ced536-5b5d-4679-ad0d-ef9a9e2dce7c",
+  "orderId": "ebfe33a4-bf80-48a3-8ae7-15f674512b71",
   "userId": "7eecc8f3-a7eb-4753-b5bf-9eac7c7ac987",
   "paymentMethod": "BANK_TRANSFER"
 }
 
 ### Update status to COMPLETED
-PATCH http://localhost:8080/api/payment/90f64743-dfe8-4308-b43d-31783d85470d/status
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI3ZWVjYzhmMy1hN2ViLTQ3NTMtYjViZi05ZWFjN2M3YWM5ODciLCJlbWFpbCI6InVzZXJAZW1haWwuY29tIiwicm9sZSI6IlJPTEVfVVNFUiIsImlhdCI6MTc4NTU5NjA5MCwiZXhwIjoxNzg1NTk2OTkwfQ.-duyMZjJYCShNWYCLfeVxnhCtgq1xPVp1z04Ivly-6Y
+PATCH http://localhost:8080/api/payment/806d242e-0e7f-4461-a254-0a4adb29aec8/status
+Authorization: Bearer {{token}}
 Content-Type: application/json
 
 {

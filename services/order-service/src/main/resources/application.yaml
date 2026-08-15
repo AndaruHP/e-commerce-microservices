@@ -15,7 +15,7 @@ spring:
       - db/migration
 
   kafka:
-    bootstrap-servers: localhost:9092
+    bootstrap-servers: localhost:29092
     producer:
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
       properties:

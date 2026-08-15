@@ -23,13 +23,6 @@ public class GatewayFilters {
         return new CorrelationIDAndLoggingFilter();
     }
 
-    @Bean
-    public HttpClientCustomizer httpClientCustomizer() {
-        return httpClient -> httpClient
-                .option(ChannelOption.CONNECT_TIMEOUT_MILLIS, 5000)
-                .responseTimeout(Duration.ofSeconds(10));
-    }
-
     static class CorrelationIDAndLoggingFilter implements GlobalFilter, Ordered {
         private static final Logger log = LoggerFactory.getLogger(CorrelationIDAndLoggingFilter.class);
         private static final String X_REQUEST_ID = "X-Request-Id" ;

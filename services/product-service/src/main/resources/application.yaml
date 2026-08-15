@@ -13,6 +13,15 @@ spring:
     baseline-on-migrate: true
     locations:
       - db/migration
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: 6379
+  cache:
+    type: redis
+    redis:
+      time-to-live: 5m
+      cache-null-values: false
 
 jwt:
   secret: d2hhdGV2ZXJ5bG9uZ3NlY3JldGtleWZvcmp3dHRvazE=
