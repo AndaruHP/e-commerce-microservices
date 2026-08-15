@@ -81,3 +81,9 @@ Content-Type: application/json
 {
   "status": "COMPLETED"
 }
+
+### Logstash
+GET http://localhost:9200/_cluster/health
+
+### Logstash
+GET http://localhost:9200/_cat/indices
