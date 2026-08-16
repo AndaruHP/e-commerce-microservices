@@ -1,4 +1,4 @@
-@token = eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI3ZWVjYzhmMy1hN2ViLTQ3NTMtYjViZi05ZWFjN2M3YWM5ODciLCJlbWFpbCI6InVzZXJAZW1haWwuY29tIiwicm9sZSI6IlJPTEVfVVNFUiIsImlhdCI6MTc4Njg1Njg2NSwiZXhwIjoxNzg2ODU3NzY1fQ.ifuyRtcwK4zWPdhZd7b0-U-fUj-tXVKWmQDE_y835MA
+@token = eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI3ZWVjYzhmMy1hN2ViLTQ3NTMtYjViZi05ZWFjN2M3YWM5ODciLCJlbWFpbCI6InVzZXJAZW1haWwuY29tIiwicm9sZSI6IlJPTEVfVVNFUiIsImlhdCI6MTc4Njg5NDEyMCwiZXhwIjoxNzg2ODk1MDIwfQ.a06JtqDLbAHSpb0015l3lrfkMZcCDzT3tVuvZ7_BvLI
 
 ### Login user
 POST http://localhost:8080/api/auth/login
@@ -88,13 +88,13 @@ Authorization: Bearer {{token}}
 Content-Type: application/json
 
 {
-  "orderId": "ebfe33a4-bf80-48a3-8ae7-15f674512b71",
+  "orderId": "7c23d1e9-c5bc-42c8-bace-13b6ece6f901",
   "userId": "7eecc8f3-a7eb-4753-b5bf-9eac7c7ac987",
   "paymentMethod": "BANK_TRANSFER"
 }
 
 ### Update status to COMPLETED
-PATCH http://localhost:8080/api/payment/806d242e-0e7f-4461-a254-0a4adb29aec8/status
+PATCH http://localhost:8080/api/payment/2616de55-e24f-44fb-82ed-da5c0eb21b02/status
 Authorization: Bearer {{token}}
 Content-Type: application/json
 
