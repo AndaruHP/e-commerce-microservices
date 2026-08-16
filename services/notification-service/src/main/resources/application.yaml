@@ -27,3 +27,9 @@ jwt:
 
 server:
   port: 8088
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, prometheus

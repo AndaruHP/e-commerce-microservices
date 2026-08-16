@@ -10,7 +10,7 @@ public record ProductResponse(
         String description,
         BigDecimal price,
         Integer stock,
-        LocalDateTime created_at,
-        LocalDateTime updated_at
+        LocalDateTime createdAt,
+        LocalDateTime updatedAt
 ) {
 }

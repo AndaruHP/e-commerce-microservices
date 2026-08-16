@@ -1,4 +1,4 @@
-@token = eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI3ZWVjYzhmMy1hN2ViLTQ3NTMtYjViZi05ZWFjN2M3YWM5ODciLCJlbWFpbCI6InVzZXJAZW1haWwuY29tIiwicm9sZSI6IlJPTEVfVVNFUiIsImlhdCI6MTc4NjgxMjMzNiwiZXhwIjoxNzg2ODEzMjM2fQ.fCpsc2JF-GjBiDCOeNxtWLFGQG-fy0UbiCZG9gdi6-U
+@token = eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI3ZWVjYzhmMy1hN2ViLTQ3NTMtYjViZi05ZWFjN2M3YWM5ODciLCJlbWFpbCI6InVzZXJAZW1haWwuY29tIiwicm9sZSI6IlJPTEVfVVNFUiIsImlhdCI6MTc4Njg1Njg2NSwiZXhwIjoxNzg2ODU3NzY1fQ.ifuyRtcwK4zWPdhZd7b0-U-fUj-tXVKWmQDE_y835MA
 
 ### Login user
 POST http://localhost:8080/api/auth/login
@@ -32,7 +32,7 @@ GET http://localhost:8080/api/product/6790fb5f-8e63-49b3-8fb3-0a634b1d73f1
 Authorization: Bearer {{token}}
 
 ### Search a product
-GET http://localhost:8080/api/product/search?q=samsung
+GET http://localhost:8080/api/product/search?q=samsun
 Authorization: Bearer {{token}}
 
 ### Create product
@@ -41,7 +41,7 @@ Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-  "name": "Samsung Note 3",
+  "name": "Samsung S25",
   "description": "Mantap",
   "stock": 10,
   "price": 29.99
@@ -58,6 +58,10 @@ Content-Type: application/json
   "price": 48.99,
   "stock": 9
 }
+
+### Delete a product
+DELETE http://localhost:8080/api/product/28ab4675-7eca-49e2-96bc-d0e0e7472523
+Authorization: Bearer {{token}}
 
 ### Create order
 POST http://localhost:8080/api/order

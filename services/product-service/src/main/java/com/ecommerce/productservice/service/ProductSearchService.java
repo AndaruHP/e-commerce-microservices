@@ -44,7 +44,7 @@ public class ProductSearchService {
 
         if (q != null && !q.isBlank()) {
             must.add(Query.of(x -> x.multiMatch(m -> m
-                    .fields("name^2", "description")
+                    .fields("name.autocomplete^3", "name^2", "description")
                     .query(q)))
             );
         }

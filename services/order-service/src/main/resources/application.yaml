@@ -41,3 +41,9 @@ services:
     url: ${CART_SERVICE_URL:http://localhost:8083}
   inventory-service:
     url: ${INVENTORY_SERVICE_URL:http://localhost:8086}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, prometheus

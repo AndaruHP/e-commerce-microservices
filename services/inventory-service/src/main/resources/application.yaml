@@ -25,3 +25,9 @@ jwt:
 
 server:
   port: 8086
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, prometheus
